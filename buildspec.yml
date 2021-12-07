@@ -24,5 +24,5 @@ phases:
       - yarn add -D sonarqube-scanner
       - yarn run test
       - ls coverage
-      - sonar-scanner -Dsonar.projectKey=test -Dsonar.sources=. -Dsonar.tests=tests -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info -Dsonar.testExecutionReportPaths=test-report.xml -Dsonar.login=admin -Dsonar.password=Wbst@123 -Dsonar.host.url=http://54.147.210.18:9000 -X $SQ_ANALYSIS_PARAMS
+      - sonar-scanner -Dsonar.projectKey=test -Dsonar.sources=src -Dsonar.tests=src -Dsonar.tests=tests -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info -Dsonar.testExecutionReportPaths=test-report.xml -Dsonar.login=admin -Dsonar.password=Wbst@123 -Dsonar.host.url=http://54.147.210.18:9000 -X $SQ_ANALYSIS_PARAMS
       - docker build --tag $REPOSITORY:$TAG .
