@@ -21,8 +21,8 @@ phases:
   build:
     commands:
       - echo "SQ_ANALYSIS_PARAMS -> ${SQ_ANALYSIS_PARAMS}"
-      - yarn add -D jest-sonar-reporter
+      - yarn add -D sonarqube-scanner
       - yarn run test
-      - ls
+      - ls coverage
       - sonar-scanner -Dsonar.projectKey=test -Dsonar.sources=. -Dsonar.tests=tests -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info -Dsonar.testExecutionReportPaths=test-report.xml -Dsonar.login=admin -Dsonar.password=Wbst@123 -Dsonar.host.url=http://54.147.210.18:9000 -X $SQ_ANALYSIS_PARAMS
       - docker build --tag $REPOSITORY:$TAG .
