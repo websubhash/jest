@@ -1,0 +1,28 @@
+--- 
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+    commands:
+      - curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh
+      - bash nodesource_setup.sh
+      - apt install nodejs
+      - npm install --global yarn
+      - yarn --version
+      - node -v
+      - npm -v
+  pre_build:
+    commands:
+      # get the scanner
+      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472.zip
+      - unzip ./sonar-scanner-cli-4.6.2.2472.zip
+      - export PATH=$PATH:$PWD/sonar-scanner-4.6.2.2472/bin/
+  build:
+    commands:
+      - echo "SQ_ANALYSIS_PARAMS -> ${SQ_ANALYSIS_PARAMS}"
+      - yarn add -D jest-sonar-reporter
+      - yarn run test
+      - ls
+      - sonar-scanner -Dsonar.projectKey=test -Dsonar.sources=. -Dsonar.tests=tests -sonar.typescript.lcov.reportPaths=coverage/lcov.info -Dsonar.testExecutionReportPaths=test-report.xml -Dsonar.login=admin -Dsonar.password=Wbst@123 -Dsonar.host.url=http://54.147.210.18:9000 -X $SQ_ANALYSIS_PARAMS
+      - docker build --tag $REPOSITORY:$TAG .
