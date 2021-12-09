@@ -9,7 +9,11 @@
   },
   "jest": {
     "collectCoverage": true,
-    "testResultsProcessor": "jest-sonar-reporter"
+    "testResultsProcessor": "jest-sonar-reporter",
+    "coverageReporters": [
+      "text",
+      "xml"
+    ]
 },
   "author": "",
   "license": "ISC",
