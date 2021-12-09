@@ -7,6 +7,10 @@
     "build": "tsc -p .",
     "test": "jest --coverage"
   },
+  "jest": {
+    "collectCoverage": true,
+    "testResultsProcessor": "jest-sonar-reporter"
+},
   "author": "",
   "license": "ISC",
   "devDependencies": {
